@@ -19,9 +19,9 @@ abstract class HttpDialogCallback<T>(private val activity: Activity, private val
         loadingDialog.dismiss()
     }
 
-    override fun onSuccess(data: T?) {
+    /*override fun onSuccess(data: T?) {
         loadingDialog.dismiss()
-    }
+    }*/
 
     override fun onStart() {
         loadingDialog

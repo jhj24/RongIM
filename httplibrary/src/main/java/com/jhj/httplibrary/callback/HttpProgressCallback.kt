@@ -9,7 +9,7 @@ import com.jhj.prompt.progress.PercentFragment
  * 带有进度条的Callback
  * Created by jhj on 2017-12-31 0031.
  */
-open class HttpProgressCallback<T>(private val activity: Activity, private val msg: String) : BaseProgressCallback<T>() {
+open abstract class HttpProgressCallback<T>(private val activity: Activity, private val msg: String) : BaseProgressCallback<T>() {
 
     private var percentDialog = PercentFragment.Builder(activity)
 
@@ -17,9 +17,9 @@ open class HttpProgressCallback<T>(private val activity: Activity, private val m
         percentDialog.dismiss()
     }
 
-    override fun onSuccess(data: T?) {
+    /*override fun onSuccess(data: T?) {
         percentDialog.dismiss()
-    }
+    }*/
 
     override fun onStart() {
         percentDialog

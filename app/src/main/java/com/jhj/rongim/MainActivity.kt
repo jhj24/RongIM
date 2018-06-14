@@ -12,7 +12,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        TokenManager().connect(Config.TOKEN)
+        TokenManager().getToken()
+       // TokenManager().connect(Config.TOKEN)
         one.setOnClickListener {
             RongIM.getInstance().setCurrentUserInfo(UserInfo(Config.GUID, Config.NAME, Uri.parse(Config.PHOTO)))
             RongIM.getInstance().refreshUserInfoCache(UserInfo(Config.GUID, Config.NAME, Uri.parse(Config.PHOTO)))

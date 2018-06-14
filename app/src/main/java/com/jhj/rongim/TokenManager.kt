@@ -1,9 +1,8 @@
 package com.jhj.rongim
 
 import android.util.Log
-import com.jhj.httplibrary.callback.base.HttpCallback
 import com.jhj.httplibrary.httpcall.HttpCall
-import com.jhj.httplibrary.result.Result
+import com.jhj.rongim.net.THttpCallback
 import io.rong.imkit.RongIM
 import io.rong.imlib.RongIMClient
 
@@ -14,25 +13,23 @@ import io.rong.imlib.RongIMClient
 class TokenManager {
 
 
-   /* fun getToken() {
+    fun getToken() {
         HttpCall.post(Config.GET_TOKEN)
                 .addParam("userid", Config.GUID)
                 .addParam("name", Config.NAME)
                 .addParam("portraitUri", Config.PHOTO)
-                .enqueue(object : HttpCallback<String>() {
+                .enqueue(object : THttpCallback<String>() {
+
                     override fun onSuccess(data: String?) {
                         connect(data)
                     }
 
-
                     override fun onFailure(msg: String?, errorCode: Int) {
-                        print(msg)
+                        print(errorCode)
                     }
-
-
                 })
     }
-*/
+
 
     /**
      *

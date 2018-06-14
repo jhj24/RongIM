@@ -9,29 +9,13 @@ import java.lang.reflect.Type
  * 网络请求返回的基础数据
  * Created by jhj on 2018-1-11 0011.
  */
-open class Result<T> : Serializable {
+abstract class Result<T> : Serializable {
 
-    /**
-     * 返回码：0-失败，1-成功
-     */
-    var result: Int = 0
+    abstract val clazz: Result<T>
 
-    /**
-     * 返回提示信息
-     */
-    var msg: String = ""
 
-    /**
-     * 返回数据对象
-     */
-    private val data: T? = null
-
-    fun getData(): T? {
-        return data;
-    }
-
-  fun <T> parseJson(str: String?, type: Type): T {
-        val superType = type(Result::class.java, type)
+    fun <T> parseJson(str: String?, type: Type): T {
+        val superType = type(clazz::class.java, type)
         return Gson().fromJson(str, superType)
     }
 

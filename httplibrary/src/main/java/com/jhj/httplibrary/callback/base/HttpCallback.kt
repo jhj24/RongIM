@@ -15,20 +15,21 @@ import java.lang.reflect.Type
  * Created by jhj on 2017-12-28 0028.
  */
 abstract class HttpCallback<T> : Callback {
-    companion object {
-        var error: HashMap<Int, String> = HashMap()
 
-        init {
-            error[1] = "请求失败，请重试"
-            error[2] = "请求失败"
-            error[3] = "数据异常"
-            error[4] = "数据格式异常"
-            error[5] = "服务器异常"
-            error[6] = "请求取消"
-        }
+    //abstract val clazz: HttpCallback<T>
+
+    var error: HashMap<Int, String> = HashMap()
+
+    init {
+        error[1] = "请求失败，请重试"
+        error[2] = "请求失败"
+        error[3] = "数据异常"
+        error[4] = "数据格式异常"
+        error[5] = "服务器异常" //网络没返回异常原因时，默认是服务器异常
+        error[6] = "请求取消"
     }
 
-    private var hanlder = Handler()
+    val hanlder = Handler()
 
     override fun onFailure(call: Call, e: IOException) {
         if (call.isCanceled) {
@@ -36,12 +37,6 @@ abstract class HttpCallback<T> : Callback {
             return
         }
 
-        try {
-
-        }catch (e: FileNotFoundException){
-            hanlder.post { callFailure(7) }
-            return
-        }
         hanlder.post { callFailure(1) }
     }
 
@@ -55,31 +50,16 @@ abstract class HttpCallback<T> : Callback {
             hanlder.post { callFailure(3) }
             return
         }
-        val result: Result<T>
-        try {
-            result = Result<T>().parseJson(str, getTClazz())
-        } catch (e: Exception) {
-            hanlder.post { callFailure(4) }
-            return
-        }
-
-        if (result.result == 0) {
-            hanlder.post { callFailure(5, result.msg) }
-            return
-        }
-
-        hanlder.post {
-            /*if (result.showMsg && !result.msg.isNullOrBlank()) {
-                val context = MyApplication.instance
-                context.toast(result.msg)
-            }*/
-            onSuccess(result.getData())
-            onFinish()
-        }
+        onStringResponse(str)
     }
 
+    /**
+     * 由于后台处理差异，返回的json数据格式以及名字不一样，需要进行单独的处理。首先json解析，一般可以根据返回码、返回msg、返回数据进行处理
+     */
+    abstract fun onStringResponse(str: String?)
 
-    private fun callFailure(errorCode: Int, msg: String? = null) {
+
+    fun callFailure(errorCode: Int, msg: String? = null) {
         onFailure(msg ?: error[errorCode] ?: "", errorCode)
         onFinish()
     }
@@ -98,7 +78,7 @@ abstract class HttpCallback<T> : Callback {
     /**
      * 获取泛参数实际类型
      */
-    private fun getTClazz(): Type {
+    fun getTClazz(): Type {
         //获取当前类带有泛型的父类
         val clazz = this.javaClass.genericSuperclass
         return if (clazz is ParameterizedType) {

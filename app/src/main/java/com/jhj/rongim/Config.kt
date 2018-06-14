@@ -27,6 +27,6 @@ object Config {
      const val NAME = "简豪杰"
      const val PHOTO = "https://www.eqid.top:8009/image/20180416/13460200436/20180416042959headimage.png"
      const val TOKEN = "wOpvfGfY9K3KhEYIHSEHvLnFTfcz4eTA91lyUsO2maYH9CFq3MQHih5eszY1z/e4yCZE5nvk4H5ZPfgMRAZ69VjWDofifdImdvlsbXfl2ULo1lXnJqKmkfoI6+iafa/cPmbJjkdrvBQ="
-     const val targetId = "4f3eaceb7ea0439ab2428c6ac0fc8c69"
+     const val targetId = "4f47e8c7e40541d4a2f03c3c72304252"
 
 }
