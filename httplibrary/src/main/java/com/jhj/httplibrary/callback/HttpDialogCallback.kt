@@ -2,8 +2,6 @@ package com.jhj.httplibrary.callback
 
 import android.app.Activity
 import com.jhj.httplibrary.callback.base.HttpCallback
-import com.jhj.httplibrary.httpcall.HttpCall
-import com.jhj.httplibrary.result.Result
 import com.jhj.prompt.progress.LoadingFragment
 
 /**
@@ -19,9 +17,9 @@ abstract class HttpDialogCallback<T>(private val activity: Activity, private val
         loadingDialog.dismiss()
     }
 
-    /*override fun onSuccess(data: T?) {
+    override fun onSuccess(data: T?) {
         loadingDialog.dismiss()
-    }*/
+    }
 
     override fun onStart() {
         loadingDialog

@@ -1,11 +1,9 @@
 package com.jhj.httplibrary.callback.base
 
 import android.os.Handler
-import com.jhj.httplibrary.result.Result
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
-import java.io.FileNotFoundException
 import java.io.IOException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
@@ -16,7 +14,6 @@ import java.lang.reflect.Type
  */
 abstract class HttpCallback<T> : Callback {
 
-    //abstract val clazz: HttpCallback<T>
 
     var error: HashMap<Int, String> = HashMap()
 
@@ -53,12 +50,6 @@ abstract class HttpCallback<T> : Callback {
         onStringResponse(str)
     }
 
-    /**
-     * 由于后台处理差异，返回的json数据格式以及名字不一样，需要进行单独的处理。首先json解析，一般可以根据返回码、返回msg、返回数据进行处理
-     */
-    abstract fun onStringResponse(str: String?)
-
-
     fun callFailure(errorCode: Int, msg: String? = null) {
         onFailure(msg ?: error[errorCode] ?: "", errorCode)
         onFinish()
@@ -70,10 +61,6 @@ abstract class HttpCallback<T> : Callback {
 
     open fun onFinish() {
     }
-
-    abstract fun onSuccess(data: T?)
-
-    abstract fun onFailure(msg: String?, errorCode: Int)
 
     /**
      * 获取泛参数实际类型
@@ -88,5 +75,14 @@ abstract class HttpCallback<T> : Callback {
             clazz
         }
     }
+
+    abstract fun onSuccess(data: T?)
+
+    abstract fun onFailure(msg: String?, errorCode: Int)
+
+    /**
+     * 由于后台处理差异，返回的json数据格式以及名字不一样，需要进行单独的处理。首先json解析，一般可以根据返回码、返回msg、返回数据进行处理
+     */
+    abstract fun onStringResponse(str: String?)
 
 }

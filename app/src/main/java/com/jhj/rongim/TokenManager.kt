@@ -1,8 +1,9 @@
 package com.jhj.rongim
 
+import android.app.Activity
 import android.util.Log
 import com.jhj.httplibrary.httpcall.HttpCall
-import com.jhj.rongim.net.THttpCallback
+import com.jhj.rongim.net.IMCallback
 import io.rong.imkit.RongIM
 import io.rong.imlib.RongIMClient
 
@@ -13,19 +14,20 @@ import io.rong.imlib.RongIMClient
 class TokenManager {
 
 
-    fun getToken() {
+    fun getToken(activity: Activity) {
         HttpCall.post(Config.GET_TOKEN)
                 .addParam("userid", Config.GUID)
                 .addParam("name", Config.NAME)
                 .addParam("portraitUri", Config.PHOTO)
-                .enqueue(object : THttpCallback<String>() {
-
+                .enqueue(object : IMCallback<String>(activity, "正在加载...") {
                     override fun onSuccess(data: String?) {
+                        super.onSuccess(data)
                         connect(data)
                     }
 
                     override fun onFailure(msg: String?, errorCode: Int) {
-                        print(errorCode)
+                        super.onFailure(msg, errorCode)
+                        print(msg)
                     }
                 })
     }

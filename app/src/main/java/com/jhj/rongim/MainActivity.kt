@@ -9,14 +9,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        TokenManager().getToken()
-       // TokenManager().connect(Config.TOKEN)
+        TokenManager().getToken(this)
         one.setOnClickListener {
-            RongIM.getInstance().setCurrentUserInfo(UserInfo(Config.GUID, Config.NAME, Uri.parse(Config.PHOTO)))
-            RongIM.getInstance().refreshUserInfoCache(UserInfo(Config.GUID, Config.NAME, Uri.parse(Config.PHOTO)))
+           // RongIM.getInstance().setCurrentUserInfo(UserInfo(Config.GUID, Config.NAME, Uri.parse(Config.PHOTO)))
+           // RongIM.getInstance().refreshUserInfoCache(UserInfo(Config.GUID, Config.NAME, Uri.parse(Config.PHOTO)))
             RongIM.getInstance().startPrivateChat(this, Config.targetId, "标题")
         }
     }

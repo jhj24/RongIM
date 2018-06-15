@@ -1,17 +1,18 @@
 package com.jhj.rongim.net
 
-import com.jhj.httplibrary.callback.base.HttpCallback
+import android.app.Activity
+import com.jhj.httplibrary.callback.HttpDialogCallback
 
 /**
  * Created by jhj on 18-6-14.
  */
-abstract class THttpCallback<T> : HttpCallback<T>() {
+abstract class IMCallback<T>(activity: Activity, msg: String) : HttpDialogCallback<T>(activity, msg) {
 
 
     override fun onStringResponse(str: String?) {
-        val result: TResult<T>
+        val result: IMResult<T>
         try {
-            result = TResult<T>().parseJson(str, getTClazz())
+            result = IMResult<T>().parseJson(str, getTClazz())
         } catch (e: Exception) {
             hanlder.post { callFailure(4) }
             return

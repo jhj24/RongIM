@@ -1,7 +1,5 @@
 package com.jhj.httplibrary.callback.base
 
-import com.jhj.httplibrary.result.Result
-
 /**
  * 带进度条的Callback基类.
  * 用于自定义带进度条的Callback

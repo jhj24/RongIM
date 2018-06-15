@@ -2,14 +2,13 @@ package com.jhj.httplibrary.callback
 
 import android.app.Activity
 import com.jhj.httplibrary.callback.base.BaseProgressCallback
-import com.jhj.httplibrary.result.Result
 import com.jhj.prompt.progress.PercentFragment
 
 /**
  * 带有进度条的Callback
  * Created by jhj on 2017-12-31 0031.
  */
-open abstract class HttpProgressCallback<T>(private val activity: Activity, private val msg: String) : BaseProgressCallback<T>() {
+abstract class HttpProgressCallback<T>(private val activity: Activity, private val msg: String) : BaseProgressCallback<T>() {
 
     private var percentDialog = PercentFragment.Builder(activity)
 
@@ -17,9 +16,9 @@ open abstract class HttpProgressCallback<T>(private val activity: Activity, priv
         percentDialog.dismiss()
     }
 
-    /*override fun onSuccess(data: T?) {
+    override fun onSuccess(data: T?) {
         percentDialog.dismiss()
-    }*/
+    }
 
     override fun onStart() {
         percentDialog

@@ -9,9 +9,9 @@ import java.lang.reflect.Type
  * 网络请求返回的基础数据
  * Created by jhj on 2018-1-11 0011.
  */
-abstract class Result<T> : Serializable {
+abstract class Result<T : Result<T>> : Serializable {
 
-    abstract val clazz: Result<T>
+    abstract val clazz: T
 
 
     fun <T> parseJson(str: String?, type: Type): T {
