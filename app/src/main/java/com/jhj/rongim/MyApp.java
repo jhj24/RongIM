@@ -4,6 +4,8 @@ import android.app.Application;
 import android.net.Uri;
 
 import com.jhj.httplibrary.httpcall.HttpCall;
+import com.jhj.rongim.rong.ConversationListener;
+import com.jhj.rongim.rong.RongUtil;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
@@ -26,15 +28,19 @@ public class MyApp extends Application {
         RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
             @Override
             public UserInfo getUserInfo(String s) {
-                return new UserInfo(Config.GUID, Config.NAME, Uri.parse(Config.PHOTO));
+                RongUtil.INSTANCE.refreshUserInfo(s);
+                return null;
             }
         }, true);
-        RongIM.setGroupInfoProvider(new RongIM.GroupInfoProvider() {
+
+        /*RongIM.setGroupInfoProvider(new RongIM.GroupInfoProvider() {
             @Override
             public Group getGroupInfo(String s) {
                 return null;
             }
-        }, true);
+        }, true);;*/
+        //会话界面操作的监听器。
+        RongIM.setConversationClickListener(new ConversationListener());
         //设置消息体内是否携带用户信息。
        /* RongIM.getInstance().setCurrentUserInfo(new UserInfo(Config.GUID, Config.NAME, Uri.parse(Config.PHOTO)));
         RongIM.getInstance().setMessageAttachedUserInfo(true);*/

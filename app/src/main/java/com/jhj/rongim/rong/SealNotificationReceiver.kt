@@ -1,4 +1,4 @@
-package com.jhj.rongim
+package com.jhj.rongim.rong
 
 import android.content.Context
 import io.rong.push.notification.PushMessageReceiver

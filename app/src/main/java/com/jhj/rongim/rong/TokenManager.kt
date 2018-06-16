@@ -1,8 +1,9 @@
-package com.jhj.rongim
+package com.jhj.rongim.rong
 
 import android.app.Activity
 import android.util.Log
 import com.jhj.httplibrary.httpcall.HttpCall
+import com.jhj.rongim.Config
 import com.jhj.rongim.net.IMCallback
 import io.rong.imkit.RongIM
 import io.rong.imlib.RongIMClient

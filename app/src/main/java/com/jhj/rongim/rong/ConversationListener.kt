@@ -1,7 +1,8 @@
-package com.jhj.rongim
+package com.jhj.rongim.rong
 
 import android.content.Context
 import android.view.View
+import com.jhj.rongim.UserInfoActivity
 
 import io.rong.imkit.RongIM
 import io.rong.imlib.model.Conversation
@@ -10,7 +11,8 @@ import io.rong.imlib.model.UserInfo
 import org.jetbrains.anko.startActivity
 
 /**
- * 消息点击事件
+ * 消息/头像点击事件
+ * 如果用户自己处理了点击后的逻辑处理，则返回 true，否则返回 false，false 走融云默认处理方式。
  * Created by jhj on 18-6-14.
  */
 
