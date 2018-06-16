@@ -21,11 +21,12 @@ class ConversationListActivity : FragmentActivity() {
     private var mConversationsTypes: Array<Conversation.ConversationType>? = null
     private var mConversationListFragment: ConversationListFragment? = null
     private var isDebug: Boolean = false
-
+    var uri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_conversation_list)
         initConversationList()
+        (conversation_list as ConversationListFragment).uri = uri
 
     }
 
@@ -34,7 +35,7 @@ class ConversationListActivity : FragmentActivity() {
         if (mConversationListFragment == null) {
             val listFragment = ConversationListFragment()
             listFragment.setAdapter(ConversationListAdapterEx(RongContext.getInstance()))
-            val uri: Uri
+
             if (isDebug) {
                 uri = Uri.parse("rong://" + applicationInfo.packageName).buildUpon()
                         .appendPath("conversationlist")
